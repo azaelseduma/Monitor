@@ -1,0 +1,33 @@
+/*Nav*/
+ul.dropdown-lr {
+  width: 300px;
+}
+
+@media (max-width: 768px) {
+	.dropdown-lr h3 {
+		color: #eee;
+	}
+	.dropdown-lr label {
+		color: #eee;
+	}
+}
+
+label.validation-message {
+    color: #a94442;
+}
+
+/*About*/
+.map {
+    min-width: 300px;
+    min-height: 300px;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    background-color: #F5F5F5;
+    color: #36A0FF;
+    height: 70px;
+    font-size: 27px;
+    padding: 10px;
+}
