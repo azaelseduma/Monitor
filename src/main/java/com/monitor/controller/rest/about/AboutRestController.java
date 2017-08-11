@@ -5,6 +5,7 @@ import com.monitor.service.about.ContactUsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class AboutRestController {
     private ContactUsService contactUsService;
 
 
-    @RequestMapping(value = "/api/about/", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/contactUs/list", method = RequestMethod.GET)
     public ResponseEntity<List<ContactUs>> getAll() {
         List<ContactUs> contactUsList = contactUsService.getAll();
         if (contactUsList.isEmpty()) {
@@ -28,4 +29,17 @@ public class AboutRestController {
         }
         return new ResponseEntity<>(contactUsList, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/rest/contactUs/save", method = RequestMethod.POST)
+    public ResponseEntity<Void> saveContactUs(@RequestBody ContactUs contactUs) {
+        System.out.println("Creating Contact Us for " + contactUs.getEmail());
+        try {
+            contactUsService.save(contactUs);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
 }
