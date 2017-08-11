@@ -23,9 +23,9 @@ INSERT INTO `monitor`.`role` (`role`, `description`) VALUES ('USER', 'User');
 #
 INSERT INTO `monitor`.`role` (`role`, `description`) VALUES ('ANONYMOUS', 'Anonymous');
 #
-INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/', 'fa fa-home', 'Home', 'Anonymous');
+INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/', 'fa fa-home', 'Home', 'ANONYMOUS');
 #
-INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/about', 'fa fa-wpforms', 'About', 'Anonymous');
+INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/about', 'fa fa-wpforms', 'About', 'ANONYMOUS');
 
 
 #

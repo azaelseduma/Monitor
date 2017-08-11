@@ -30,7 +30,7 @@ public class NavServiceImpl implements NavService {
         List<Nav> navs = new ArrayList<>();
 
         List<Nav> navList = navRepository.findAllEnabled();
-        navs.addAll(navList.stream().filter(nav -> nav.getRole().getDescription().equals("ANONYMOUS")).collect(Collectors.toList()));
+        navs.addAll(navList.stream().filter(nav -> nav.getRole().getRole().equals("ANONYMOUS")).collect(Collectors.toList()));
 
         if (user != null) {
             for (Nav nav : navList) {
