@@ -1,5 +1,4 @@
 # Monitor
-localhost:8080
 #
 Spring MVC, RESTful service, Hibernate, JPA, Thymeleaf and Maven
 
@@ -28,3 +27,7 @@ INSERT INTO `monitor`.`role` (`role`, `description`) VALUES ('ANONYMOUS', 'Anony
 INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/', 'fa fa-home', 'Home', 'Anonymous');
 #
 INSERT INTO `monitor`.`nav` (`href`, `icon`, `name`,`role`) VALUES ('/about', 'fa fa-wpforms', 'About', 'Anonymous');
+
+
+#
+localhost:8080
