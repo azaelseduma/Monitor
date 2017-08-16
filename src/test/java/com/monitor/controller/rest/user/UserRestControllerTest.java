@@ -21,33 +21,6 @@ public class UserRestControllerTest extends ApplicationTest {
     public static final String USERNAME = "aseduma@gmail.com";
     public static final String PASSWORD = "xbox360";
 
-    /*
-     * Full test pack
-     */
-    @Test
-    public void testUserRestControllerPack() {
-        listAllUsers();
-        getUser();
-
-        createUser();
-        listAllUsers();
-
-        updateUser();
-        listAllUsers();
-
-        deleteUser();
-        listAllUsers();
-    }
-
-    private HttpHeaders getHeaders() {
-        String plainCredentials = USERNAME + ":" + PASSWORD;
-        String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Credentials);
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        return headers;
-    }
 
     /*
      * Send a GET request to get a specific user.
@@ -149,6 +122,34 @@ public class UserRestControllerTest extends ApplicationTest {
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
         }
+    }
+
+    /*
+     * Full test pack
+     */
+    @Test
+    public void testUserRestControllerPack() {
+        listAllUsers();
+        getUser();
+
+        createUser();
+        listAllUsers();
+
+        updateUser();
+        listAllUsers();
+
+        deleteUser();
+        listAllUsers();
+    }
+
+    private HttpHeaders getHeaders() {
+        String plainCredentials = USERNAME + ":" + PASSWORD;
+        String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        return headers;
     }
 
 }
