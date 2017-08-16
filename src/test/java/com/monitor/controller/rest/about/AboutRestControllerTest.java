@@ -15,15 +15,17 @@ import java.util.Random;
  * Created by Azael on 2017/08/11.
  */
 public class AboutRestControllerTest extends ApplicationTest {
+    public static final String REST_SERVICE_URI = "http://localhost:8080/rest";
+    public static final String USERNAME = "aseduma@gmail.com";
+    public static final String PASSWORD = "xbox360";
 
     @Test
-    public void testContactUsList() {
-        String url = "http://localhost:8080/rest/contactUs/list";
+    public void listContactUsList() {
 
-        HttpEntity<?> httpEntity = new HttpEntity<>(getHttpHeaders("aseduma@gmail.com", "xbox360"));
+        HttpEntity<?> httpEntity = new HttpEntity<>(getHeaders());
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<ContactUs[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, httpEntity, ContactUs[].class);
+        ResponseEntity<ContactUs[]> responseEntity = restTemplate.exchange(REST_SERVICE_URI + "/contactUs/", HttpMethod.GET, httpEntity, ContactUs[].class);
 
         System.out.println(responseEntity.getStatusCode());
 
@@ -45,9 +47,7 @@ public class AboutRestControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void testContactUsSave() {
-        String url = "http://localhost:8080/rest/contactUs/save";
-
+    public void saveContactUs() {
         ContactUs contactUs = new ContactUs();
         contactUs.setName("Azael");
         contactUs.setSurname("Seduma");
@@ -55,23 +55,24 @@ public class AboutRestControllerTest extends ApplicationTest {
         contactUs.setPhoneNumber("0743519649");
         contactUs.setMessage("Test " + (1 + new Random().nextInt(1000)));
 
-        HttpEntity<ContactUs> httpEntity = new HttpEntity<>(contactUs, getHttpHeaders("aseduma@gmail.com", "xbox360"));
+        HttpEntity<ContactUs> request = new HttpEntity<>(contactUs, getHeaders());
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Void> responseEntity = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Void.class);
-        System.out.println(responseEntity.getStatusCode());
-        if (responseEntity.getStatusCode().equals(HttpStatus.CREATED)) {
+        ResponseEntity<Void> response = restTemplate.exchange(REST_SERVICE_URI + "/save", HttpMethod.POST, request, Void.class);
+        System.out.println(response.getStatusCode());
+        if (response.getStatusCode().equals(HttpStatus.CREATED)) {
             System.out.println("Saved");
-        } else {
-            System.out.println(responseEntity.getStatusCode());
         }
     }
 
-    private HttpHeaders getHttpHeaders(String username, String password) {
-        String credentials = username + ":" + password;
+    private HttpHeaders getHeaders() {
+        String plainCredentials = USERNAME + ":" + PASSWORD;
+        String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
+
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Basic " + new String(Base64.encodeBase64(credentials.getBytes())));
+        headers.add("Authorization", "Basic " + base64Credentials);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         return headers;
     }
+
 }

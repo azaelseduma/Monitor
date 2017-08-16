@@ -21,7 +21,7 @@ public class AboutRestController {
     private ContactUsService contactUsService;
 
 
-    @RequestMapping(value = "/rest/contactUs/list", method = RequestMethod.GET)
+    @RequestMapping(value = "rest/contactUs/", method = RequestMethod.GET)
     public ResponseEntity<List<ContactUs>> getAll() {
         List<ContactUs> contactUsList = contactUsService.getAll();
         if (contactUsList.isEmpty()) {
@@ -30,7 +30,7 @@ public class AboutRestController {
         return new ResponseEntity<>(contactUsList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/rest/contactUs/save", method = RequestMethod.POST)
+    @RequestMapping(value = "rest/contactUs/save", method = RequestMethod.POST)
     public ResponseEntity<Void> saveContactUs(@RequestBody ContactUs contactUs) {
         System.out.println("Creating Contact Us for " + contactUs.getEmail());
         try {
